@@ -33,8 +33,8 @@ var Playlistify = {
             type: "GET",
             headers: {"Authorization": "Bearer " + Playlistify.access_token},
             success: function(result){
-                $("#createText").append(result);
-                console.log(result.items[0].name);
+                document.getElementById("createText").innerHTML = result.items[0].name
+                console.log(result);
             }
         })
     }
