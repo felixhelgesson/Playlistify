@@ -1,6 +1,8 @@
+
 $(document).ready(function () {
     Playlistify.init();
     console.log("ready");
+    
     //console.log(document.referrer);
     //console.log(Playlistify.getUrlVars());
 })
@@ -8,7 +10,7 @@ $(document).ready(function () {
 
 
 var Playlistify = {
-    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://WebShare.mah.se/af5392&scope=user-top-read&response_type=token",
+    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af8654&scope=user-top-read&response_type=token",
     
     access_token:"",
 
@@ -33,7 +35,10 @@ var Playlistify = {
             type: "GET",
             headers: {"Authorization": "Bearer " + Playlistify.access_token},
             success: function(result){
-                document.getElementById("createText").innerHTML = result.items[0].name
+                // document.getElementById("createText").innerHTML = result.items[0].name;
+                for (let i = 0; i < result.items.length; i++) {
+                    $('#createText').append('<li class = "listItem">' + result.items[i].name + "</li><br>");
+                }
                 console.log(result);
             }
         })

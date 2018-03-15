@@ -7,3 +7,6 @@
 .img-centered{
     margin: 0 auto;
 }
+.nav-item :hover{
+font-size: 20px;
+}
