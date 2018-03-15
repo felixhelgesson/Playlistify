@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 
 var Playlistify = {
-    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://WebShare.mah.se/af5392&response_type=token",
+    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://WebShare.mah.se/af5392&scope=user-top-read&response_type=token",
     
     access_token:"",
 
@@ -29,12 +29,12 @@ var Playlistify = {
 
     getTopArtists: function(){
         $.ajax({
-            url:"https://api.spotify.com/v1/search?q=kendrick&type=artist",
+            url:"https://api.spotify.com/v1/me/top/artists",
             type: "GET",
             headers: {"Authorization": "Bearer " + Playlistify.access_token},
             success: function(result){
                 $("#createText").append(result);
-                console.log(result);
+                console.log(result.items[0].name);
             }
         })
     }
