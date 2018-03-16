@@ -10,9 +10,11 @@ $(document).ready(function () {
 
 
 var Playlistify = {
-    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af8654/redirectIndex.html&scope=user-top-read&response_type=token",
+    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af5392/redirectIndex.html&scope=user-top-read&response_type=token",
     
     access_token:"",
+
+    loggedInId:"",
 
     topArtistsId: [],
 
@@ -23,6 +25,7 @@ var Playlistify = {
         var s = window.location.hash.split('=');
         var key = s[1].split('&');
         Playlistify.access_token = key[0];
+        Playlistify.getPersonId();
         Playlistify.getTopArtists();
     },
 
@@ -42,8 +45,17 @@ var Playlistify = {
                     $('#createText').append('<li class = "listItem">' + result.items[i].name + "</li><br>");
                     Playlistify.topArtistsId.push(result.items[i].id)
                 }
-                console.log(result);
-                console.log(Playlistify.topArtistsId);
+            }
+        })
+    },
+
+    getPersonId: function(){
+        $.ajax({
+            url: "https://api.spotify.com/v1/me",
+            type: "GET",
+            headers: {"Authorization": "Bearer " + Playlistify.access_token},
+            success: function(result){
+                Playlistify.loggedInId = result.id;
             }
         })
     }
