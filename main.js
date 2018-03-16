@@ -66,14 +66,11 @@ var Playlistify = {
                     $(this).append('<br><input type="checkbox" value="' + indexNr + '" class = "checkbox ml-2 " id = "checkboxOneInput">');
                     indexNr++;
                 })
-<<<<<<< HEAD
 
                 $(".listItem").addClass("p-3").css("background-color", "#f97575");
                 
                 // console.log(result);
                 // console.log(Playlistify.topArtistsId);
-=======
->>>>>>> refs/remotes/origin/master
 
             }
         })
@@ -111,14 +108,11 @@ var Playlistify = {
                         "</p>");
                     Playlistify.topTracksId.push(result.items[i].id);
                 }
-<<<<<<< HEAD
 
                 $(".statListItem").addClass("p-1");
                 console.log(result);
                 console.log(Playlistify.topTracksId);
 
-=======
->>>>>>> refs/remotes/origin/master
             }
         })
     },
