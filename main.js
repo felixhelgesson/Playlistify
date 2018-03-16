@@ -46,7 +46,6 @@ var Playlistify = {
 
     oauth: function () {
         window.location.replace(Playlistify.oauthURI);
-        //console.log(Playlistify.getUrlVars());
     },
 
     getTopArtists: function () {
@@ -67,8 +66,6 @@ var Playlistify = {
                     $(this).append('<input type="checkbox" value="' + indexNr + '" class = "checkbox ml-3">');
                     indexNr++;
                 })
-                // console.log(result);
-                // console.log(Playlistify.topArtistsId);
 
             }
         })
@@ -106,9 +103,6 @@ var Playlistify = {
                         "</p><br>");
                     Playlistify.topTracksId.push(result.items[i].id);
                 }
-                console.log(result);
-                console.log(Playlistify.topTracksId);
-
             }
         })
     },
@@ -136,14 +130,57 @@ var Playlistify = {
 
     createPlaylist: function(){
         Playlistify.getCheckedArtistId();
-        var numberOfTracks = 50/ Playlistify.checkedArtistId.length;
+        var numberOfTracks = 25/ Playlistify.checkedArtistId.length;
         for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
-            Playlistify.randomizeTracks(i, numberOfTracks);           
+            Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks);           
         }
     },
 
-    randomizeTracks: function(artistId, nrOfTracks){
-        console.log(Playlistify.checkedArray);
+    getAlbums: function(artistId, nrOfTracks){
+        $.ajax({
+            url: "https://api.spotify.com/v1/artists/" + artistId + "/albums",
+            type: "GET",
+            headers: { "Authorization": "Bearer " + Playlistify.access_token },
+            data: {
+                album_type: 'album',
+            },
+            success: function (result) {
+                var albumId = [];
+                for (var i = 0; i < result.items.length; i++) {
+                    albumId.push(result.items[i].id)
+                }
+                Playlistify.getTracks(albumId, nrOfTracks);
+            }
+        })
+    },
+
+    getTracks: function(albumId, nrOfTracks){
+        var URI = [];
+        var successes = 0;
+        for (var i = 0; i < albumId.length; i++) {
+            $.ajax({
+                url: "https://api.spotify.com/v1/albums/" + albumId[i] + "/tracks",
+                type: "GET",
+                headers: { "Authorization": "Bearer " + Playlistify.access_token },
+                success: function (result) {
+                    successes ++;
+                    URI = [];
+                    for (var i = 0; i < result.items.length; i++) {
+                        URI.push(result.items[i].uri);
+                    }
+                    if(successes == albumId.length){
+                        Playlistify.getRandomTrack(URI, nrOfTracks);
+                    }                   
+                }
+            });
+        }  
+    },
+
+    getRandomTrack: function(URI, nrOfTracks){
+        for (var i = 0; i < nrOfTracks; i++) {
+            Playlistify.trackURI.push(URI[Math.floor(Math.random() * URI.length)])
+        }      
+        console.log(Playlistify.trackURI)   
     }
 }
 
