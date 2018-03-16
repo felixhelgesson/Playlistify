@@ -14,6 +14,8 @@ var Playlistify = {
 
     access_token: "",
 
+    loggedInId:"",
+
     topArtistsId: [],
     checkedArray: [],
 
@@ -30,6 +32,7 @@ var Playlistify = {
         var s = window.location.hash.split('=');
         var key = s[1].split('&');
         Playlistify.access_token = key[0];
+        Playlistify.getPersonId();
         Playlistify.getTopArtists();
     },
 
@@ -59,6 +62,17 @@ var Playlistify = {
                 console.log(result);
                 console.log(Playlistify.topArtistsId);
 
+            }
+        })
+    },
+
+    getPersonId: function(){
+        $.ajax({
+            url: "https://api.spotify.com/v1/me",
+            type: "GET",
+            headers: {"Authorization": "Bearer " + Playlistify.access_token},
+            success: function(result){
+                Playlistify.loggedInId = result.id;
             }
         })
     },
