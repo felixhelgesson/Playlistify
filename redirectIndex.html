@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Playlistify</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Dosis|Lobster|Pacifico" rel="stylesheet">
 </head>
 
 <body class="">
     <header>
-        <img class="rounded mx-auto d-block" src="LoggaWeb.png" alt="logo">
+        <h1 class="logo">•Playlistify•</h1>
         <br>
     </header>
 
@@ -26,19 +27,37 @@
         <br>
     </nav>
 
-    <main class="wrapper container d-flex flex-col flex-wrap justify-content-center">
+    <main class="wrapper container">
 
-        <section class="statSec bg-warning m-1 p-4 text-center w-100">
-            <form action="">
-                <input type="radio" name="time" class="radio shortTerm" value="short_term">Short-Term
-                <input type="radio" name="time" class="radio mediumTerm" value="medium_term">Medium-Term
-                <input type="radio" name="time" class="radio longTerm" value="long_term">Long-Term
+        <section class="statSec m-1 p-4 text-center w-100">
+
+            <form action="" class=" timePeriodSelect row d-flex flex-wrap flex-row text-center justify-content-center bg-warning">
+
+                <div class="opt1 ml-1 mr-1 col-sm">
+                    Past 4 Weeks:
+                    <br>
+                    <input type="radio" name="time" class="radio shortTerm " value="short_term" id="r1">
+                </div>
+
+                <div class="opt2 ml-1 mr-1 col-sm">
+                    Past 6 Months:
+                    <br>
+                    <input type="radio" name="time" class="radio mediumTerm" value="medium_term" id="r2">
+                </div>
+
+                <div class="opt2 ml-1 mr-1 col-sm">
+                    Past Year:
+                    <br>
+                    <input type="radio" name="time" class="radio longTerm" value="long_term" id="r3">
+                </div>
+
             </form>
-            <div id="statText"></div>
+            <br>
+            <div class="col-sm bg-warning w-100" id="statText"></div>
         </section>
 
-        <section class="createSec bg-danger m-1 p-4 text-center w-100">
-            <div id="createText"></div>
+        <section class="createSec d-flex flex-col flex-wrap justify-content-center bg-danger m-1 p-4 text-center w-100">
+            <div class="d-flex flex-col flex-wrap justify-content-center align-content-center" id="createText"></div>
 
             <button class="createPlaylist btn">Create Playlist</button>
 
