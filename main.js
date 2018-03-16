@@ -14,6 +14,8 @@ var Playlistify = {
     
     access_token:"",
 
+    topArtistsId: [],
+
     init: function(){
         $("#redirectBtn").click(function() {
             Playlistify.oauth();
@@ -38,8 +40,10 @@ var Playlistify = {
                 // document.getElementById("createText").innerHTML = result.items[0].name;
                 for (let i = 0; i < result.items.length; i++) {
                     $('#createText').append('<li class = "listItem">' + result.items[i].name + "</li><br>");
+                    Playlistify.topArtistsId.push(result.items[i].id)
                 }
                 console.log(result);
+                console.log(Playlistify.topArtistsId);
             }
         })
     }
