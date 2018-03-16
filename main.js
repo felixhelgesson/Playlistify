@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 
 var Playlistify = {
-    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af8654/redirectIndex.html&scope=user-top-read&response_type=token",
+    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af5392/redirectIndex.html&scope=user-top-read&response_type=token",
 
     access_token: "",
 
@@ -18,6 +18,8 @@ var Playlistify = {
 
     topArtistsId: [],
     checkedArray: [],
+    checkedArtistId: [],
+    trackURI: [],
 
     init: function () {
         $("#redirectBtn").click(function () {
@@ -25,7 +27,7 @@ var Playlistify = {
         });
 
         $(".createPlaylist").click(function () {
-            Playlistify.getChecked();
+            Playlistify.createPlaylist();
         });
 
 
@@ -77,12 +79,25 @@ var Playlistify = {
         })
     },
 
-    getChecked: function () {
+    getCheckedArtistId: function () {
         $("input:checked").each(function () {
             Playlistify.checkedArray.push($(this).val());
         });
-        
-        console.log(Playlistify.checkedArray);
+        for (var i = 0; i < Playlistify.checkedArray.length; i++) {
+            Playlistify.checkedArtistId.push(Playlistify.topArtistsId[Playlistify.checkedArray[i]])       
+        }
+    },
+
+    createPlaylist: function(){
+        Playlistify.getCheckedArtistId();
+        var numberOfTracks = 50/ Playlistify.checkedArtistId.length;
+        for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
+            Playlistify.randomizeTracks(i, numberOfTracks);           
+        }
+    },
+
+    randomizeTracks: function(artistId, nrOfTracks){
+
     }
 }
 
