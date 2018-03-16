@@ -14,9 +14,10 @@ var Playlistify = {
 
     access_token: "",
 
-    loggedInId:"",
+    loggedInId: "",
 
     topArtistsId: [],
+    topTracksId: [],
     checkedArray: [],
     checkedArtistId: [],
     trackURI: [],
@@ -29,6 +30,11 @@ var Playlistify = {
         $(".createPlaylist").click(function () {
             Playlistify.createPlaylist();
         });
+
+        $(".radio").click(function () {
+            Playlistify.getTimePeriod();
+        });
+
 
 
         var s = window.location.hash.split('=');
@@ -58,22 +64,61 @@ var Playlistify = {
                 }
 
                 $(".listItem").each(function () {
-                    $(this).append('<input type="checkbox" value="' + indexNr + '" class = "ml-3">');
+                    $(this).append('<input type="checkbox" value="' + indexNr + '" class = "checkbox ml-3">');
                     indexNr++;
                 })
-                console.log(result);
-                console.log(Playlistify.topArtistsId);
+                // console.log(result);
+                // console.log(Playlistify.topArtistsId);
 
             }
         })
     },
 
-    getPersonId: function(){
+    getTimePeriod: function(){
+        var timePeriod = "";
+        $('#statText').empty();
+
+        $("input:checked").each(function () {
+            
+            if ($(this).val() == "short_term") {
+                timePeriod = "short_term";
+            }
+            else if ($(this).val() == "medium_term") {
+                timePeriod = "medium_term";
+            }
+            else if ($(this).val() == "long_term") {
+                timePeriod = "long_term";
+            }
+        })
+        Playlistify.getTopTracks(timePeriod);
+    },
+
+    getTopTracks: function (timePeriod) {
+        var indexNr = 0;
+        $.ajax({
+            url: "https://api.spotify.com/v1/me/top/tracks?time_range="+timePeriod,
+            type: "GET",
+            headers: { "Authorization": "Bearer " + Playlistify.access_token },
+            success: function (result) {
+                // document.getElementById("createText").innerHTML = result.items[0].name;
+                for (let i = 0; i < result.items.length; i++) {
+                    $('#statText').append('<p class = "listItem">' + result.items[i].name +
+                        "</p><br>");
+                    Playlistify.topTracksId.push(result.items[i].id);
+                }
+                console.log(result);
+                console.log(Playlistify.topTracksId);
+
+            }
+        })
+    },
+
+    getPersonId: function () {
         $.ajax({
             url: "https://api.spotify.com/v1/me",
             type: "GET",
-            headers: {"Authorization": "Bearer " + Playlistify.access_token},
-            success: function(result){
+            headers: { "Authorization": "Bearer " + Playlistify.access_token },
+            success: function (result) {
                 Playlistify.loggedInId = result.id;
             }
         })
@@ -83,6 +128,7 @@ var Playlistify = {
         $("input:checked").each(function () {
             Playlistify.checkedArray.push($(this).val());
         });
+
         for (var i = 0; i < Playlistify.checkedArray.length; i++) {
             Playlistify.checkedArtistId.push(Playlistify.topArtistsId[Playlistify.checkedArray[i]])       
         }
@@ -97,7 +143,7 @@ var Playlistify = {
     },
 
     randomizeTracks: function(artistId, nrOfTracks){
-
+        console.log(Playlistify.checkedArray);
     }
 }
 

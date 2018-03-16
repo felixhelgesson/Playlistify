@@ -22,17 +22,19 @@
             <li class="nav-item navItem record">
                 <a class="nav-link uploadBtn" href="#">Create.</a>
             </li>
-            <li class="nav-item navItem gallery">
-                <a class="nav-link" href="#">Discover.</a>
-            </li>
         </ul>
         <br>
     </nav>
 
     <main class="wrapper container d-flex flex-col flex-wrap justify-content-center">
-        
+
         <section class="statSec bg-warning m-1 p-4 text-center w-100">
-            Statistics
+            <form action="">
+                <input type="radio" name="time" class="radio shortTerm" value="short_term">Short-Term
+                <input type="radio" name="time" class="radio mediumTerm" value="medium_term">Medium-Term
+                <input type="radio" name="time" class="radio longTerm" value="long_term">Long-Term
+            </form>
+            <div id="statText"></div>
         </section>
 
         <section class="createSec bg-danger m-1 p-4 text-center w-100">
