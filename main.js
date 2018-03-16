@@ -57,15 +57,18 @@ var Playlistify = {
             success: function (result) {
                 // document.getElementById("createText").innerHTML = result.items[0].name;
                 for (let i = 0; i < result.items.length; i++) {
-                    $('#createText').append('<p class = "listItem">' + result.items[i].name +
+                    $('#createText').append('<p class = "listItem m-2 pb-1 text-danger">' + result.items[i].name +
                         "</p><br>");
                     Playlistify.topArtistsId.push(result.items[i].id);
                 }
 
                 $(".listItem").each(function () {
-                    $(this).append('<input type="checkbox" value="' + indexNr + '" class = "checkbox ml-3">');
+                    $(this).append('<br><input type="checkbox" value="' + indexNr + '" class = "checkbox ml-2 " id = "checkboxOneInput">');
                     indexNr++;
                 })
+
+                $(".listItem").addClass("p-3").css("background-color", "#f97575");
+                
                 // console.log(result);
                 // console.log(Playlistify.topArtistsId);
 
@@ -101,10 +104,12 @@ var Playlistify = {
             success: function (result) {
                 // document.getElementById("createText").innerHTML = result.items[0].name;
                 for (let i = 0; i < result.items.length; i++) {
-                    $('#statText').append('<p class = "listItem">' + result.items[i].name +
-                        "</p><br>");
+                    $('#statText').append('<p class = "statListItem m-2">• ' + result.items[i].name +
+                        "</p>");
                     Playlistify.topTracksId.push(result.items[i].id);
                 }
+
+                $(".statListItem").addClass("p-1");
                 console.log(result);
                 console.log(Playlistify.topTracksId);
 

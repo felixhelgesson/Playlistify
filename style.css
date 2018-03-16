@@ -1,12 +1,69 @@
+body {}
+
 .col-centered {
     float: none;
     margin-right: auto;
     margin-left: auto;
 }
 
-.img-centered{
+.img-centered {
     margin: 0 auto;
 }
-.nav-item :hover{
-font-size: 20px;
+
+.nav-item :hover {
+    font-size: 20px;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 75px;
+    color: #263238;
+    transform: rotate(-5deg);
+    /* text-decoration: underline; */
+}
+
+.createSec {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.timePeriodSelect{
+    padding: 20px;
+}
+.radio{
+    color: #263238;
+    height: 25px;
+    width: 25px;
+    margin: 0 auto;
+    text-align: center;
+
+}
+.statText{
+    background-color: #ffbb33;
+    padding: 30px;
+}
+.statSec {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.statListItem {
+    /* background-color: #fdf2de; */
+    color: #263238;
+    vertical-align: middle;
+}
+
+.listItem {
+}
+
+.btn {
+    font-weight: bolder;
+}
+
+.checkbox {
+    height: 25px;
+    width: 25px;
 }
