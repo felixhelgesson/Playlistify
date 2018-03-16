@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Playlistify</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="">
+    <header>
+        <img class="rounded mx-auto d-block" src="LoggaWeb.png" alt="logo">
+        <br>
+    </header>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
+        <ul class="navbar-nav">
+            <li class="nav-item navItem searchFilm">
+                <a class="nav-link searchBtn" href="#">Stats.</a>
+            </li>
+            <li class="nav-item navItem record">
+                <a class="nav-link uploadBtn" href="#">Create.</a>
+            </li>
+            <li class="nav-item navItem gallery">
+                <a class="nav-link" href="#">Discover.</a>
+            </li>
+        </ul>
+        <br>
+    </nav>
+
+    <main class="wrapper container d-flex flex-col flex-wrap justify-content-center">
+        
+        <section class="statSec bg-warning m-1 p-4 text-center w-100">
+            Statistics
+        </section>
+
+        <section class="createSec bg-danger m-1 p-4 text-center w-100">
+            <ol id="createText"></ol>
+        </section>
+
+
+    </main>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <script src="buttonFx.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+</body>
+
+</html>
