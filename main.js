@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 
 var Playlistify = {
-    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af5392/redirectIndex.html&scope=user-top-read&response_type=token",
+    oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af5392/redirectIndex.html&scope=user-top-read+playlist-modify-private+&response_type=token",
 
     access_token: "",
 
@@ -142,11 +142,39 @@ var Playlistify = {
         Playlistify.getCheckedArtistId();
         var numberOfTracks = 25/ Playlistify.checkedArtistId.length;
         for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
-            Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks);           
+            Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks, function(){
+                Playlistify.createPlaylistApiCall();
+            });           
         }
     },
 
-    getAlbums: function(artistId, nrOfTracks){
+    createPlaylistApiCall: function(){
+        $.ajax({
+            url: "https://api.spotify.com/v1/users/" + Playlistify.loggedInId + "/playlists",
+            type: "POST",
+            headers: { "Authorization": "Bearer " + Playlistify.access_token },
+            contentType: "application/json",
+            data: JSON.stringify({name: "Playlistify", public: false}),
+            success: function (result) {
+                Playlistify.addTracksToPlaylist(result.id);
+            }
+        })
+    },
+
+    addTracksToPlaylist: function(id){
+        $.ajax({
+            url: "https://api.spotify.com/v1/users/"+ Playlistify.loggedInId +"/playlists/" + id + "/tracks",
+            type: "POST",
+            headers: { "Authorization": "Bearer " + Playlistify.access_token },
+            contentType: "application/json",
+            data: JSON.stringify({uris: Playlistify.trackURI}),
+            success: function (result) {
+                console.log("success")
+            }
+        })
+    },
+
+    getAlbums: function(artistId, nrOfTracks, cb){
         $.ajax({
             url: "https://api.spotify.com/v1/artists/" + artistId + "/albums",
             type: "GET",
@@ -159,12 +187,12 @@ var Playlistify = {
                 for (var i = 0; i < result.items.length; i++) {
                     albumId.push(result.items[i].id)
                 }
-                Playlistify.getTracks(albumId, nrOfTracks);
+                Playlistify.getTracks(albumId, nrOfTracks, cb);
             }
         })
     },
 
-    getTracks: function(albumId, nrOfTracks){
+    getTracks: function(albumId, nrOfTracks, cb){
         var URI = [];
         var successes = 0;
         for (var i = 0; i < albumId.length; i++) {
@@ -184,13 +212,13 @@ var Playlistify = {
                 }
             });
         }  
+        console.log("Callback här?")
     },
 
     getRandomTrack: function(URI, nrOfTracks){
         for (var i = 0; i < nrOfTracks; i++) {
             Playlistify.trackURI.push(URI[Math.floor(Math.random() * URI.length)])
-        }      
-        console.log(Playlistify.trackURI)   
+        }       
     }
 }
 
