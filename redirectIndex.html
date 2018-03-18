@@ -18,10 +18,10 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center">
         <ul class="navbar-nav">
             <li class="nav-item navItem searchFilm">
-                <a class="nav-link searchBtn" href="#">Stats.</a>
+                <button class="nav-link statSecBtn m-2 btn-link">Stats.</a>
             </li>
             <li class="nav-item navItem record">
-                <a class="nav-link uploadBtn" href="#">Create.</a>
+                <button class="nav-link createSecBtn m-2 btn-link">Create.</a>
             </li>
         </ul>
         <br>
@@ -29,40 +29,53 @@
 
     <main class="wrapper container">
 
-        <section class="statSec m-1 p-4 text-center w-100">
-
-            <form action="" class=" timePeriodSelect row d-flex flex-wrap flex-row text-center justify-content-center bg-warning">
-
-                <div class="opt1 ml-1 mr-1 col-sm">
-                    Past 4 Weeks:
-                    <br>
-                    <input type="radio" name="time" class="radio shortTerm " value="short_term" id="r1">
-                </div>
-
-                <div class="opt2 ml-1 mr-1 col-sm">
-                    Past 6 Months:
-                    <br>
-                    <input type="radio" name="time" class="radio mediumTerm" value="medium_term" id="r2">
-                </div>
-
-                <div class="opt2 ml-1 mr-1 col-sm">
-                    Past Year:
-                    <br>
-                    <input type="radio" name="time" class="radio longTerm" value="long_term" id="r3">
-                </div>
-
-            </form>
-            <br>
-            <div class="col-sm bg-warning w-100" id="statText"></div>
-        </section>
+        
 
         <section class="createSec d-flex flex-col flex-wrap justify-content-center bg-danger m-1 p-4 text-center w-100">
+            <h4 class="sectionHeader text-center text-light p-3">•Create your randomized playlist with your favourite artists•</h4>
             <div class="d-flex flex-col flex-wrap justify-content-center align-content-center" id="createText"></div>
+            <p class="text-light cursive">Name of the playlist:</p>
+            <input type="text" class="playlistName w-100">
+            <button class="createPlaylist btn m-3">•Create Playlist•</button>
 
-            <button class="createPlaylist btn">Create Playlist</button>
 
         </section>
+        <div class="loader col-centered d-none"></div>
+        <div class="showPlaylist d-none flex-col flex-wrap justify-content-center align-content-center col-centered">
+            <iframe class="embeddedPlaylist w-100" src="" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <br>
+            <button class="createNewBtn btn m-3">Create another one!</button>
+        </div>
 
+
+        <section class="statSec d-none m-1 p-4 text-center w-100">
+
+                <form action="" class=" timePeriodSelect row d-flex flex-wrap flex-row text-center justify-content-center bg-warning w-100">
+    
+                    <div class="opt1 ml-1 mr-1 col-sm">
+                        Past 4 Weeks:
+                        <br>
+                        <input type="radio" name="time" class="radio shortTerm " value="short_term" id="r1">
+                    </div>
+    
+                    <div class="opt2 ml-1 mr-1 col-sm">
+                        Past 6 Months:
+                        <br>
+                        <input type="radio" name="time" class="radio mediumTerm" value="medium_term" id="r2">
+                    </div>
+    
+                    <div class="opt2 ml-1 mr-1 col-sm">
+                        Past Year:
+                        <br>
+                        <input type="radio" name="time" class="radio longTerm" value="long_term" id="r3">
+                    </div>
+    
+                    <br>
+                    <div class="bg-warning w-100" id="statText">
+                </form>
+    
+                </div>
+            </section>
 
     </main>
 
@@ -70,6 +83,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="main.js"></script>
     <script src="buttonFx.js"></script>
+    <script src="sectionHandler.js"></script>
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
