@@ -21,6 +21,7 @@ var Playlistify = {
     checkedArray: [],
     checkedArtistId: [],
     trackURI: [],
+    URI: [],
 
     init: function () {
         $("#redirectBtn").click(function () {
@@ -110,9 +111,7 @@ var Playlistify = {
                 }
 
                 $(".statListItem").addClass("p-1");
-                console.log(result);
-                console.log(Playlistify.topTracksId);
-
+                //console.log(result);
             }
         })
     },
@@ -140,7 +139,7 @@ var Playlistify = {
 
     createPlaylist: function(){
         Playlistify.getCheckedArtistId();
-        var numberOfTracks = 25/ Playlistify.checkedArtistId.length;
+        var numberOfTracks = 50/ Playlistify.checkedArtistId.length;
         for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
             Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks, function(){
                 Playlistify.createPlaylistApiCall();
@@ -186,14 +185,15 @@ var Playlistify = {
                 var albumId = [];
                 for (var i = 0; i < result.items.length; i++) {
                     albumId.push(result.items[i].id)
-                }
-                Playlistify.getTracks(albumId, nrOfTracks, cb);
+                    if(result.items.length == albumId.length){
+                        Playlistify.getTracks(albumId, nrOfTracks, cb);
+                    }
+                }                               
             }
         })
     },
 
     getTracks: function(albumId, nrOfTracks, cb){
-        var URI = [];
         var successes = 0;
         for (var i = 0; i < albumId.length; i++) {
             $.ajax({
@@ -202,23 +202,24 @@ var Playlistify = {
                 headers: { "Authorization": "Bearer " + Playlistify.access_token },
                 success: function (result) {
                     successes ++;
-                    URI = [];
                     for (var i = 0; i < result.items.length; i++) {
-                        URI.push(result.items[i].uri);
+                        Playlistify.URI.push(result.items[i].uri);
                     }
                     if(successes == albumId.length){
-                        Playlistify.getRandomTrack(URI, nrOfTracks);
-                    }                   
+                        Playlistify.getRandomTrack(nrOfTracks, cb);
+                    }                
                 }
             });
         }  
-        console.log("Callback här?")
     },
 
-    getRandomTrack: function(URI, nrOfTracks){
+    getRandomTrack: function(nrOfTracks, cb){
         for (var i = 0; i < nrOfTracks; i++) {
-            Playlistify.trackURI.push(URI[Math.floor(Math.random() * URI.length)])
-        }       
+            Playlistify.trackURI.push(Playlistify.URI[Math.floor(Math.random() * Playlistify.URI.length)])
+        }   
+        if(Playlistify.trackURI.length >=50){
+            cb();
+        } 
     }
 }
 
