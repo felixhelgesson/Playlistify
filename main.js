@@ -59,8 +59,8 @@ var Playlistify = {
             success: function (result) {
                 // document.getElementById("createText").innerHTML = result.items[0].name;
                 for (let i = 0; i < result.items.length; i++) {
-                    $('#createText').append('<p class = "listItem m-2 pb-1 text-danger">' + result.items[i].name +
-                        "</p><br>");
+                    $('#createText').append('<p class = "listItem m-2 text-danger">•' + result.items[i].name +
+                        "•</p><br>");
                     Playlistify.topArtistsId.push(result.items[i].id);
                 }
 
@@ -106,12 +106,12 @@ var Playlistify = {
             success: function (result) {
                 // document.getElementById("createText").innerHTML = result.items[0].name;
                 for (let i = 0; i < result.items.length; i++) {
-                    $('#statText').append('<p class = "statListItem m-2">• ' + result.items[i].name +
-                        "</p>");
+                    $('#statText').append('<p class = "statListItem m-2">•' + result.items[i].name +
+                        "•</p>");
                     Playlistify.topTracksId.push(result.items[i].id);
                 }
 
-                $(".statListItem").addClass("p-1");
+                $(".statListItem").addClass("p-3");
                 //console.log(result);
             }
         })
@@ -139,9 +139,9 @@ var Playlistify = {
     },
 
     createPlaylist: function () {
+        $(".loader").removeClass("d-none");
         Playlistify.getCheckedArtistId();
         if (Playlistify.checkedArtistId.length != 0 ) {
-            $(".loader").removeClass("d-none");
             var numberOfTracks = 50 / Playlistify.checkedArtistId.length;
             for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
                 Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks, function () {
@@ -167,10 +167,11 @@ var Playlistify = {
                 contentType: "application/json",
                 data: JSON.stringify({ name: playlistName, public: false }),
                 success: function (result) {
-                    $(".loader").addClass("d-none");
+                    Playlistify.trackURI.sort();
                     Playlistify.addTracksToPlaylist(result.id); // result.uri = är spellistans uri
                     Playlistify.createEmbeddedPlaylist(result.id);
                     $(".playlistName").empty();
+                    $(".loader").addClass("d-none");
                 }
             })
         }

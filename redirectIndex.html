@@ -29,20 +29,21 @@
 
     <main class="wrapper container">
 
-        
+
 
         <section class="createSec d-flex flex-col flex-wrap justify-content-center bg-danger m-1 p-4 text-center w-100">
-            <h4 class="sectionHeader text-center text-light p-3">•Create your randomized playlist with your favourite artists•</h4>
+            <h4 class="sectionHeader text-center lightRedText p-3 w-100">•Create your randomized playlists•</h4>
+            <p class="lightRedText">Choose which artist(s) the playlist will contain:</p>
             <div class="d-flex flex-col flex-wrap justify-content-center align-content-center" id="createText"></div>
-            <p class="text-light cursive">Name of the playlist:</p>
-            <input type="text" class="playlistName w-100">
-            <button class="createPlaylist btn m-3">•Create Playlist•</button>
+            <p class="lightRedText">Name of the playlist:</p>
+            <input type="text" class="playlistName w-100 mb-3">
+            <button class="createPlaylist btn m-3 p-3">Create Playlist!</button>
 
 
         </section>
         <div class="loader col-centered d-none"></div>
         <div class="showPlaylist d-none flex-col flex-wrap justify-content-center align-content-center col-centered">
-            <iframe class="embeddedPlaylist w-100" src="" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <iframe class="embeddedPlaylist w-100" src="" width="300" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             <br>
             <button class="createNewBtn btn m-3">Create another one!</button>
         </div>
@@ -50,32 +51,33 @@
 
         <section class="statSec d-none m-1 p-4 text-center w-100">
 
-                <form action="" class=" timePeriodSelect row d-flex flex-wrap flex-row text-center justify-content-center bg-warning w-100">
-    
-                    <div class="opt1 ml-1 mr-1 col-sm">
-                        Past 4 Weeks:
-                        <br>
-                        <input type="radio" name="time" class="radio shortTerm " value="short_term" id="r1">
-                    </div>
-    
-                    <div class="opt2 ml-1 mr-1 col-sm">
-                        Past 6 Months:
-                        <br>
-                        <input type="radio" name="time" class="radio mediumTerm" value="medium_term" id="r2">
-                    </div>
-    
-                    <div class="opt2 ml-1 mr-1 col-sm">
-                        Past Year:
-                        <br>
-                        <input type="radio" name="time" class="radio longTerm" value="long_term" id="r3">
-                    </div>
-    
+            <form action="" class=" timePeriodSelect row d-flex flex-wrap flex-row text-center justify-content-center bg-warning w-100">
+                <br>
+                <h3 class="cursive w-100 text-centered statHeader">•Your most streamed tracks•</h3>
+                <br>
+                <div class="opt1 ml-1 mr-1 col-sm lightYellow">
+                    Past 4 Weeks:
                     <br>
-                    <div class="bg-warning w-100" id="statText">
-                </form>
-    
+                    <input type="radio" name="time" class="radio shortTerm " value="short_term" id="r1">
                 </div>
-            </section>
+
+                <div class="opt2 ml-1 mr-1 col-sm lightYellow">
+                    Past 6 Months:
+                    <br>
+                    <input type="radio" name="time" class="radio mediumTerm" value="medium_term" id="r2">
+                </div>
+
+                <div class="opt2 ml-1 mr-1 col-sm lightYellow">
+                    Past Year:
+                    <br>
+                    <input type="radio" name="time" class="radio longTerm" value="long_term" id="r3">
+                </div>
+                <br>
+                <div class="bg-warning w-100 d-flex flex-wrap justify-content-center" id="statText">
+            </form>
+
+            </div>
+        </section>
 
     </main>
 

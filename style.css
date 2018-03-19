@@ -6,6 +6,9 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.lightRedText{
+    color: #ffc1c1;
+}
 
 .cursive{
     font-family: 'Pacifico', cursive;
@@ -18,7 +21,7 @@
 .logo {
     font-family: 'Pacifico', cursive;
     text-align: center;
-    font-size: 75px;
+    font-size: 14vw;
     color: #263238;
     /*transform: rotate(-5deg);*/
     /* text-decoration: underline; */
@@ -26,11 +29,14 @@
 
 .btn-link{
     border: none;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+
 }
 
 .loader {
-    border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #e44747;
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -57,40 +63,55 @@
 .createSec {
     font-weight: bolder;
     font-size: 20px;
+    border-radius: 30px;
+}
+
+.statHeader{
+    color: #fff0d1;
+    text-align: center;
 }
 
 .timePeriodSelect{
     padding: 20px;
+    border-radius: 30px;
 }
 .radio{
-    color: #263238;
+    color: #fff0d1;
     height: 25px;
     width: 25px;
     margin: 0 auto;
     text-align: center;
 
 }
+.lightYellow{
+    color: #fff0d1;
+}
 .statText{
     background-color: #ffbb33;
     padding: 30px;
+    border-radius: 10px;
 }
 .statSec {
     font-family: 'Dosis', sans-serif;
     font-weight: bolder;
     font-size: 20px;
+    border-radius:30px;
 }
 
 .statListItem {
     /* background-color: #fdf2de; */
-    color: #263238;
-    vertical-align: middle;
+    /*color: #263238;*/
+    color: #fffcf5;
+    background-color: #ffd684;
+    border-radius:30px;
 }
 
 .listItem {
-    border: #ff9494;
+    /* border: #ff9494;
     border-style: solid;
     border-radius: 8px;
-    border-width: 5px;
+    border-width: 5px; */
+    border-radius: 20px;
 }
 
 .btn {
