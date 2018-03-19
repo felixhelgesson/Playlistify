@@ -13,7 +13,6 @@ var Playlistify = {
     oauthURI: "https://accounts.spotify.com/authorize?client_id=7f034be8c85340a9a3179b195bfa343f&redirect_uri=http://webshare.mah.se/af8654/redirectIndex.html&scope=user-top-read+playlist-modify-private+&response_type=token",
 
     access_token: "",
-
     loggedInId: "",
 
     topArtistsId: [],
@@ -29,13 +28,19 @@ var Playlistify = {
         });
 
         $(".createPlaylist").click(function () {
+
             Playlistify.createPlaylist();
+           
 
         });
 
         $(".radio").click(function () {
             Playlistify.getTimePeriod();
         });
+
+        $(".createNewBtn").click(function () {
+            Playlistify.clearPlaylist();
+        })
 
 
 
@@ -139,18 +144,19 @@ var Playlistify = {
     },
 
     createPlaylist: function () {
-        $(".loader").removeClass("d-none");
         Playlistify.getCheckedArtistId();
-        if (Playlistify.checkedArtistId.length != 0 ) {
+        if (Playlistify.checkedArtistId.length != 0 && Playlistify.checkedArtistId.length < 10) {
+            $(".loader").removeClass("d-none");
             var numberOfTracks = 50 / Playlistify.checkedArtistId.length;
             for (var i = 0; i < Playlistify.checkedArtistId.length; i++) {
                 Playlistify.getAlbums(Playlistify.checkedArtistId[i], numberOfTracks, function () {
                     Playlistify.createPlaylistApiCall();
                 });
             }
+
         }
         else {
-            alert("You have to choose at least one artist!")
+            alert("You have to choose at least one artist or maximum 10!")
         }
     },
 
@@ -174,6 +180,7 @@ var Playlistify = {
                     $(".loader").addClass("d-none");
                 }
             })
+
         }
         else {
             alert("Choose a name for the playlist!");
@@ -188,8 +195,7 @@ var Playlistify = {
             contentType: "application/json",
             data: JSON.stringify({ uris: Playlistify.trackURI }),
             success: function (result) {
-                console.log("success")
-                //Använd denna funktionen.
+                console.log("success");
             }
         })
     },
@@ -243,9 +249,13 @@ var Playlistify = {
         }
     },
 
-    createEmbeddedPlaylist: function (uri) {
+    createEmbeddedPlaylist: function (id) {
         $('.embeddedPlaylist').attr("src", "https://open.spotify.com/embed/user/" +
-            Playlistify.loggedInId + "/playlist/" + uri);
+            Playlistify.loggedInId + "/playlist/" + id);
+    },
+
+    clearPlaylist: function () {
+        location.reload();
     }
 
 
