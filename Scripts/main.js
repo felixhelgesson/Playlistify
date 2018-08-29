@@ -30,7 +30,7 @@ var Playlistify = {
         $(".createPlaylist").click(function () {
 
             Playlistify.createPlaylist();
-           
+
 
         });
 
@@ -260,5 +260,3 @@ var Playlistify = {
 
 
 }
-
-
